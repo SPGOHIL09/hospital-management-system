@@ -13,6 +13,10 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    designation : {
+        type: String,
+        required: true,
+    },
     firstName: {
         type: String,
         required: true,
@@ -85,12 +89,12 @@ const doctorSchema = new mongoose.Schema({
             {
                 staffId : {type : Number, required : true},
                 staffName : {type : String, required : true },
-                staffDesgination : {type : String,required : true}
+                staffDesignation : {type : String,required : true}
             }
         ]
     }
 });
 
-const Doctor = mongoose.model('Doctor', doctorSchema);
+const Doctor = mongoose.model('doctors', doctorSchema);
 
 module.exports = Doctor;

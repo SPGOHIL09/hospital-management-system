@@ -3,19 +3,47 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter,Route,Routes } from 'react-router-dom';
+import { BrowserRouter,Route,RouterProvider,Routes, createBrowserRouter } from 'react-router-dom';
 import Layout from './pages/Layout';
 import { Home, Login } from '@mui/icons-material';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/Login';
 import PatientLoginPage from './pages/PatientLoginPage';
 import AdminPage from './pages/AdminPage';
+import DoctorPage from './pages/DoctorPage';
 
-
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout/>,
+    children: [
+      {
+          path : '/',
+          element : <HomePage/>
+      }
+    ]
+  },
+  {
+    path : '/login',
+    element : <LoginPage/>
+  },
+  {
+    path : '/patient_login',
+    element : <PatientLoginPage/>
+  },
+  {
+    path : '/admin/:id',
+    element : <AdminPage/>
+  },
+  {
+    path : '/doctor/:id',
+    element : <DoctorPage/>
+  }
+])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* <BrowserRouter>
         <Routes>
             <Route path = '/' element = {<Layout/>}>
               <Route index element = {<HomePage/>}></Route>  
@@ -24,7 +52,8 @@ root.render(
             <Route path = '/patient_login' element={<PatientLoginPage/>}></Route>
             <Route path = '/admin' element = {<AdminPage/>}></Route>
         </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */}
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

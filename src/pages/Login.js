@@ -1,7 +1,8 @@
 import { AccountCircleRounded,Lock} from '@mui/icons-material';
 import {Grid, Paper, TextField, Button, Stack} from '@mui/material'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 
 const LoginPage = ()=>{
@@ -10,7 +11,7 @@ const LoginPage = ()=>{
     const avatarStyle = {width : 100, height : 100}
     const [formData,setFormData] = useState({username:'', password:'',});
     const [errors, setErrors] = useState({ username: '',password: '',});
-
+    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -43,25 +44,32 @@ const LoginPage = ()=>{
         } else {
           // Form is valid, you can perform further actions (e.g., submit the form)
           console.log('Form submitted:', formData);
-          const response = await fetch('http://localhost:3030/login',{
+          let response = await fetch('http://localhost:3030/login',{
             method : 'POST',
             headers : {
               'Content-Type': 'application/json',
             },
             body : JSON.stringify(formData)
           });
-          if(!response.ok) {
+          // response = await response.json();
+          if(response.status===401) {
             alert("Login Failed")
           }
           else{
             const data = await response.json();
             console.log('Login successful:', data);
-            navigate('/admin');
+            if(data.designation === 'admin'){
+              navigate('/admin/' + data.adminId);
+            }
+            else{
+              navigate('/doctor/' + data.doctorId);
+            }
           }
         }
       };
     return(
         <>
+
             <Grid container >
                 <Paper elevation = {10} style={paperStyle}>
                     <Grid align = 'center' marginBottom={5}>

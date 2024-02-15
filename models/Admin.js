@@ -13,6 +13,10 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  designation :{
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
