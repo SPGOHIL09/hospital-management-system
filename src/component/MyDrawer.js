@@ -1,25 +1,27 @@
-import { Box, IconButton, Typography,Drawer } from "@mui/material";
-import { useState } from "react";
+// Sidebar.js
+import React from 'react';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
-const MyDrawer = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+const MyDrawer = ({ open, onClose }) => {
   return (
-    <>
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="logo"
-        onClick={() => setIsDrawerOpen(true)}
-      ></IconButton>
-        <Drawer anchor ='left' open = {isDrawerOpen} onClose = {()=> setIsDrawerOpen(false)}>
-                <Box p = {2} width="250px" textAlign='center' >
-                    <Typography variant="h6" component='div'>
-                            Side Panel
-                    </Typography>
-                </Box>
-        </Drawer>
-    </>
+    <Drawer anchor="left" open={open} onClose={onClose}>
+      <List>
+        <ListItem  onClick={onClose}>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem  onClick={onClose}>
+          <ListItemText primary="About" />
+        </ListItem>
+        <ListItem  onClick={onClose}>
+          <ListItemText primary="Contact" />
+        </ListItem>
+      </List>
+    </Drawer>
   );
 };
+
 export default MyDrawer;
+ 

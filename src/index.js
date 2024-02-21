@@ -11,6 +11,8 @@ import LoginPage from './pages/Login';
 import PatientLoginPage from './pages/PatientLoginPage';
 import AdminPage from './pages/AdminPage';
 import DoctorPage from './pages/DoctorPage';
+import AdminDashboard from './component/dashboard_comp/AdminDashboard';
+import AdminProfile from './component/dashboard_comp/AdminProfile';
 
 const router = createBrowserRouter([
   {
@@ -32,9 +34,20 @@ const router = createBrowserRouter([
     element : <PatientLoginPage/>
   },
   {
-    path : '/admin/:id',
-    element : <AdminPage/>
+    path : '/admin/:id/',
+    element : <AdminPage/>,
+    children:[
+      {
+        path : '/admin/:id/',
+        element : <AdminDashboard/>
+      },
+      {
+        path  :'/admin/:id/profile',
+        element : <AdminProfile />
+      }
+    ]
   },
+  
   {
     path : '/doctor/:id',
     element : <DoctorPage/>
